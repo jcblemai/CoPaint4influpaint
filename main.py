@@ -27,7 +27,8 @@ from guided_diffusion.script_util import (
     create_classifier,
     classifier_defaults,
 )
-from metrics import LPIPS, PSNR, SSIM, Metric
+#from metrics import LPIPS, PSNR, SSIM, Metric
+from metrics import PSNR, SSIM, Metric
 from utils import save_grid, save_image, normalize_image
 from utils.config import Config
 from utils.logger import get_logger, logging_info
@@ -130,7 +131,7 @@ def main():
     recorder = ResultRecorder(
         path_record=all_paths["path_record"],
         initial_record=config,
-        use_git=config.use_git,
+        use_git=False#config.use_git,
     )
     set_random_seed(config.seed, deterministic=False, no_torch=False, no_tf=True)
 
@@ -169,7 +170,7 @@ def main():
     cond_fn = None
 
     METRICS = {
-        "lpips": Metric(LPIPS("alex", device)),
+        #"lpips": Metric(LPIPS("alex", device)),
         "psnr": Metric(PSNR(), eval_type="max"),
         "ssim": Metric(SSIM(), eval_type="max"),
     }

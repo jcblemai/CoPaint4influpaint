@@ -1,4 +1,4 @@
-import cv2
+#import cv2
 import torch
 from functools import partial
 import numpy as np
@@ -75,6 +75,7 @@ def generate_text_mask(shape, text_type):
         mask_path = "datasets/text_masks/lolcat_extra.npy"
     mask = np.load(mask_path)
     if mask.shape != shape:
+        raise ValueError()
         mask = cv2.resize(mask, dsize=shape, interpolation=cv2.INTER_CUBIC)
     assert mask.shape == shape
     mask = torch.from_numpy(mask).to(torch.float32)

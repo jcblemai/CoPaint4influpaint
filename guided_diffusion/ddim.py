@@ -402,6 +402,11 @@ class O_DDIMSampler(DDIMSampler):
             conf=conf,
             **kwargs,
         )
+        print("use_timesteps:", use_timesteps)
+        print("------------ conf")
+        conf.show()
+        print("------------ /conf")
+        print("kwargs:", kwargs)
 
         assert conf.get("optimize_xt.optimize_xt",
                         False), "Double check on optimize"

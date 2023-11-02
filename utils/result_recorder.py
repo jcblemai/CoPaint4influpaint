@@ -4,7 +4,7 @@ import shutil
 import stat
 from json import JSONDecodeError
 
-import git
+#import git
 import joblib
 import numpy as np
 import pandas as pd
@@ -16,7 +16,7 @@ from .logger import logging_info
 
 
 class ResultRecorder:
-    def __init__(self, path_record, initial_record=None, use_git=True):
+    def __init__(self, path_record, initial_record=None, use_git=False):
         """
         Initialize the result recorder. The results will be saved in a temporary file defined by path_record.temp.
         To end recording and transfer the temporary files, self.end_recording() must be called.

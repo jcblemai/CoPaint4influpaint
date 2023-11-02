@@ -1,5 +1,5 @@
 import torch
-from .lpips import LPIPS
+#from .lpips import LPIPS
 from .psnr import PSNR
 from .ssim import SSIM
 from typing import List
