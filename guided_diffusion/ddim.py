@@ -38,9 +38,13 @@ class DDIMSampler(SpacedDiffusion):
         model_fn = self._wrap_model(model_fn)
         B, C = x.shape[:2]
         assert t.shape == (B,)
+        print(x.shape, self._scale_timesteps(t))
         model_output = model_fn(x, self._scale_timesteps(t), **model_kwargs)
-        assert model_output.shape == (B, C * 2, *x.shape[2:])
-        model_output, _ = torch.split(model_output, C, dim=1)
+        print(model_output.shape, (B, C * 2, *x.shape[2:]))
+        if not model_kwargs["mymodel"]:
+            assert model_output.shape == (B, C * 2, *x.shape[2:])
+            model_output, _ = torch.split(model_output, C, dim=1)
+        print("shape before return", model_output.shape)
         return model_output
 
     def _predict_eps_from_xstart(self, x_t, t, pred_xstart):
