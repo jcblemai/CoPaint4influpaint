@@ -795,6 +795,7 @@ class O_DDIMSampler(DDIMSampler):
                         model_kwargs=model_kwargs,
                         lr_xt=lr_xt,
                         coef_xt_reg=coef_xt_reg,
+                        clip_denoised=clip_denoised,
                     )
                 status = "forward"
                 assert prev_t == cur_t + 1, "Only support 1-step time travel back"
@@ -806,10 +807,11 @@ class O_DDIMSampler(DDIMSampler):
                 lr_xt /= self.lr_xt_decay
                 coef_xt_reg /= self.coef_xt_reg_decay
 
-        x_t = x_t.clamp(-1.0, 1.0)  # normalize
+        if clip_denoised:
+            x_t = x_t.clamp(-1.0, 1.0)  # normalize
         return {"sample": x_t, "loss": loss}
 
-    def get_updated_xt(self, model_fn, x, t, model_kwargs, lr_xt, coef_xt_reg):
+    def get_updated_xt(self, model_fn, x, t, model_kwargs, lr_xt, coef_xt_reg, clip_denoised=True):
         return self.p_sample(
             model_fn,
             x=x,
@@ -819,4 +821,5 @@ class O_DDIMSampler(DDIMSampler):
             pred_xstart=None,
             lr_xt=lr_xt,
             coef_xt_reg=coef_xt_reg,
+            clip_denoised=clip_denoised,
         )["x"]
