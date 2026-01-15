@@ -40,8 +40,8 @@ def get_logger(path_log="%s.log" % get_random_time_stamp(), force_add_handler=Fa
 
 
 def logging_info(*args):
-    if logging.root.level > logging.getLevelName("INFO"):
-        logging.warning("Logging level higher than INFO!")
-        print(*args)
-    else:
+    #if logging.root.level > logging.getLevelName("INFO"):
+    #    logging.warning("Logging level higher than INFO!")
+    #    print(*args)
+    #else:
         logging.info(*args)
