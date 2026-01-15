@@ -719,6 +719,7 @@ class O_DDIMSampler(DDIMSampler):
                         pred_xstart=None,
                         lr_xt=self.lr_xt,
                         coef_xt_reg=self.coef_xt_reg,
+                        clip_denoised=clip_denoised,
                     )["loss"]
                 )
             img = img[torch.argsort(torch.tensor(xT_losses))[: shape[0]]]
@@ -746,6 +747,7 @@ class O_DDIMSampler(DDIMSampler):
                     pred_xstart=None,
                     lr_xt=lr_xt,
                     coef_xt_reg=coef_xt_reg,
+                    clip_denoised=clip_denoised,
                 )
                 x_t = output["x_prev"]
                 loss = output["loss"]
